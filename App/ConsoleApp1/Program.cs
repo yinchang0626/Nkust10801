@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using YC;
+using YC.Model;
 
 namespace ConsoleApp1
 {
@@ -32,27 +34,6 @@ namespace ConsoleApp1
     }
 
 
-    public class Group 
-    {
-        public static string UnitName="電子系";
-
-        public Group() 
-        {
-            this.Students = new List<Student>();
-        }
-
-        public string Name;
-        public List<Student> Students;
 
 
-        public void ShowStudentCount()
-        {
-            Console.WriteLine(UnitName + Students.Count);
-        }
-    }
-
-    public class Student
-    {
-        public string Name;
-    }
 }
