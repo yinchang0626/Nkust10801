@@ -8,7 +8,8 @@ namespace Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public virtual DbSet<YC.Model.Group> Groups { get; set; }
+        public virtual DbSet<YC.Models.QuestionGroup> QuestionGroups { get; set; }
+        public virtual DbSet<YC.Models.QuestionType> QuestionTypes { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

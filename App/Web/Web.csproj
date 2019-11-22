@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>aspnet-Web-C6D8FEE9-1A86-4C92-99DD-EBA800E1732D</UserSecretsId>
+    <RootNamespace>YC</RootNamespace>
   </PropertyGroup>
 
 
