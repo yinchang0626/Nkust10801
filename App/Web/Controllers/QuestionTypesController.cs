@@ -70,7 +70,7 @@ namespace Web.Controllers
         // GET: QuestionTypes/Create
         public IActionResult Create()
         {
-            ViewData["GroupId"] = new SelectList(_context.QuestionGroups, "Id", "Id");
+            ViewData["GroupId"] = new SelectList(_context.QuestionGroups, "Id", "Name");
             return View();
         }
 
@@ -85,7 +85,8 @@ namespace Web.Controllers
             {
                 _context.Add(questionType);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction(nameof(Index), new { groupId = questionType.GroupId });
             }
             ViewData["GroupId"] = new SelectList(_context.QuestionGroups, "Id", "Id", questionType.GroupId);
             return View(questionType);
@@ -104,7 +105,7 @@ namespace Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["GroupId"] = new SelectList(_context.QuestionGroups, "Id", "Id", questionType.GroupId);
+            ViewData["GroupId"] = new SelectList(_context.QuestionGroups, "Id", "Name", questionType.GroupId);
             return View(questionType);
         }
 
@@ -138,7 +139,7 @@ namespace Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { groupId = questionType.GroupId });
             }
             ViewData["GroupId"] = new SelectList(_context.QuestionGroups, "Id", "Id", questionType.GroupId);
             return View(questionType);

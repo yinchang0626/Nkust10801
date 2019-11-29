@@ -1,0 +1,87 @@
+﻿@model IEnumerable<YC.Models.Question>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>題目</h1>
+<select class="form-control" id="groupSelect" name="groupSelect">
+</select>
+<select class="form-control" id="typeSelect" name="typeSelect"></select>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Seq)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Answer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seq)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Answer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionType.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script type="text/javascript">
+        $(() => {
+            $('#groupSelect').change(() => {
+                $.getJSON('/api/Data/QuestionTypes?groupId=' + $('#groupSelect').val(), (json) => {
+                    $('#typeSelect').find('option').remove();
+                    json.forEach((t) => {
+                        $('#typeSelect').append($('<option>', {
+                            value: t.id,
+                            text: t.title
+                        }));
+                    });
+                });
+            });
+
+
+            $.getJSON('/api/Data/QuestionGroups', (json) => {
+                json.forEach((g) => {
+                    $('#groupSelect').append($('<option>', {
+                        value: g.id,
+                        text: g.name
+                    }));
+                });
+                $('#groupSelect').val(json[0].id).change();
+            });
+
+
+
+        });
+    </script>
+}

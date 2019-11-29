@@ -10,6 +10,8 @@ namespace Web.Data
     {
         public virtual DbSet<YC.Models.QuestionGroup> QuestionGroups { get; set; }
         public virtual DbSet<YC.Models.QuestionType> QuestionTypes { get; set; }
+        public virtual DbSet<YC.Models.Question> Questions { get; set; }
+        public virtual DbSet<YC.Models.QuestionOption> QuestionOptions { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
