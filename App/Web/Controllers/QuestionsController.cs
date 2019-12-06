@@ -20,7 +20,7 @@ namespace Web.Controllers
         }
 
         // GET: Questions
-        public async Task<IActionResult> Index(long typeId)
+        public IActionResult Index(long typeId)
         {
             //if (typeId == 0)
             //{
@@ -31,9 +31,26 @@ namespace Web.Controllers
 
 
 
-            var applicationDbContext = _context.Questions.Include(q => q.QuestionType);
-            return View(await applicationDbContext.ToListAsync());
+            //var applicationDbContext = _context.Questions.Include(q => q.QuestionType);
+            //return View(await applicationDbContext.ToListAsync());
+            return View();
         }
+
+        public PartialViewResult QuestionsList(long typeId)
+        {
+            var model = _context.Questions
+                .Include(x=>x.QuestionType)
+                .Where(x => x.QuestionTypeId == typeId)
+                .OrderBy(x => x.Id)
+                .ToList();
+
+
+            return PartialView(model);
+        }
+
+
+
+
 
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(long? id)

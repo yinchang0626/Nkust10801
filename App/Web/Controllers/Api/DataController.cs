@@ -35,5 +35,33 @@ namespace Web.Controllers.Api
                 .Where(x => x.GroupId == groupId)
                 .ToListAsync();
         }
+
+
+
+        [HttpPost]
+        [Route("CreateQuestion")]
+        public async Task<IActionResult> CreateQuestion(Question question)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(question);
+                await _context.SaveChangesAsync();
+                
+            }
+            return Ok();
+        }
+        [HttpPost]
+        [Route("DeleteQuestion")]
+        public async Task<IActionResult> DeleteQuestion(long id)
+        {
+            if (ModelState.IsValid)
+            {
+                var question = await _context.Questions.FindAsync(id);
+                _context.Questions.Remove(question);
+                await _context.SaveChangesAsync();
+
+            }
+            return Ok();
+        }
     }
 }
